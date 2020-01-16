@@ -9,8 +9,10 @@ INSERT INTO users (name,phone_number,address,gender,createdAt,updatedAt) VALUES 
 
 INSERT INTO users (name,phone_number,address,gender,createdAt,updatedAt) VALUES ("Ryan Batman",8765433,"33 Perth Road, Perth","Female",current_timestamp(),current_timestamp());
 
-INSERT INTO events (activity,description,location,datetime,limit,createdAt,updatedAt) VALUES ("Fishing & Crabing","Night fishing and crabing","Mandurah","2020-01-19 17:00:00",3,current_timestamp(),current_timestamp());
+INSERT INTO events (activity,category,description,location,datetime,`limit`,createdAt,updatedAt) VALUES ("Fishing & Crabing","Leisure","Night fishing and crabing","Mandurah","2020-01-19 17:00:00","3",current_timestamp(),current_timestamp());
+
+INSERT INTO events (activity,category,description,location,datetime,`limit`,createdAt,updatedAt) VALUES ("Dancing","Social","Night Club Dancing","Fremantle","2020-01-21 21:00:00","6",current_timestamp(),current_timestamp());
 
 INSERT INTO  joinersactivities (UserId,EventId,EventOwner,createdAt,updatedAt) VALUES (1,1,1,current_timestamp(),current_timestamp());
 
-INSERT INTO joinersactivities (UserId,EventId,EventOwner,createdAt,updatedAt) VALUES (2,1,0,current_timestamp(),current_timestamp());
+INSERT INTO joinersactivities (UserId,EventId,EventOwner,createdAt,updatedAt) VALUES (2,1,0,current_timestamp(),current_timestamp()); 

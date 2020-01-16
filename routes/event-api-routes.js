@@ -7,7 +7,7 @@
 
 // Requiring our models
 var db = require("../models");
-
+const { Op } = require("sequelize");
 // Routes
 // =============================================================
 module.exports = function(app) {
@@ -37,6 +37,49 @@ module.exports = function(app) {
     db.Event.findOne({
       where: {
         id: req.params.id
+      },
+      include: [db.User]
+    }).then(function(dbEvent) {
+      res.json(dbEvent);
+    });
+  });
+
+  app.get("/api/events/location/:location", function(req, res) {
+    // Here we add an "include" property to our options in our findOne query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.User
+    db.Event.findAll({
+      where: {
+        location: req.params.location
+      },
+      include: [db.User]
+    }).then(function(dbEvent) {
+      res.json(dbEvent);
+    });
+  });
+
+  app.get("/api/events/category/:category", function(req, res) {
+    // Here we add an "include" property to our options in our findOne query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.User
+    db.Event.findAll({
+      where: {
+        category: req.params.category
+      },
+      include: [db.User]
+    }).then(function(dbEvent) {
+      res.json(dbEvent);
+    });
+  });
+
+  app.get("/api/events/date/:datestart/:dateend", function(req, res) {
+    // Here we add an "include" property to our options in our findOne query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.User
+    db.Event.findAll({
+      where: {
+        datetime: 
+        {[Op.between]: [req.params.datestart, req.params.dateend]}
       },
       include: [db.User]
     }).then(function(dbEvent) {
