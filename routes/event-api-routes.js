@@ -11,7 +11,6 @@ const { Op } = require("sequelize");
 // Routes
 // =============================================================
 module.exports = function(app) {
-
   // GET route for getting all of the events
   app.get("/api/events", function(req, res) {
     var query = {};
@@ -78,8 +77,7 @@ module.exports = function(app) {
     // In this case, just db.User
     db.Event.findAll({
       where: {
-        datetime: 
-        {[Op.between]: [req.params.datestart, req.params.dateend]}
+        datetime: { [Op.between]: [req.params.datestart, req.params.dateend] }
       },
       include: [db.User]
     }).then(function(dbEvent) {
@@ -107,13 +105,11 @@ module.exports = function(app) {
 
   // PUT route for updating events
   app.put("/api/events", function(req, res) {
-    db.Event.update(
-      req.body,
-      {
-        where: {
-          id: req.body.id
-        }
-      }).then(function(dbEvent) {
+    db.Event.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbEvent) {
       res.json(dbEvent);
     });
   });
