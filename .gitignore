@@ -1,5 +1,9 @@
 # Prerequisites
 *.d
+config/*
+
+# use npm ci 
+node_modules
 
 # Compiled Object files
 *.slo
@@ -30,3 +34,4 @@
 *.exe
 *.out
 *.app
+
