@@ -52,6 +52,9 @@
     >
       <source id="video" src="" type="video/mp4" />
     </video>
+    <div>
+      <a class="btn btn-danger" href="admin.html" role="button">ADMIN</a>
+    </div>
     <div class="row-fluid d-block" id="toplogodiv">
       <!-- <i class="fas fa-users"></i> -->
       <h1>Event Seeker</h1>
@@ -62,7 +65,7 @@
       </div>
       <div id="Header-buttons">
         <div class="d-flex justify-content-around" id="buttons">
-          <button class="navbutton">See All Events</button>
+          <a href="/events" class="navbutton">See All Events</a>
           <button class="navbutton" id="date-button">Choose A Date</button>
           <button class="navbutton" id="location-button">
             Choose A Location
@@ -111,6 +114,7 @@
         <div id="category-select"></div>
       </div>
     </div>
+
     <script src="./resources/tiny-date-picker/dist/tiny-date-picker.min.js"></script>
     <script src="./resources/tiny-date-picker/dist/date-range-picker.min.js"></script>
     <script>
