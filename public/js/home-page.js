@@ -3,14 +3,14 @@ $(document).ready(function() {
   $("#location-section").hide();
   $("#category-section").hide();
 
-  $(window).scroll(function() {
-    var height = $(window).scrollTop();
-    if (height > 100) {
-      $(".closeBtn").fadeIn();
-    } else {
-      $(".closeBtn").fadeOut();
-    }
-  });
+  // $(window).scroll(function() {
+  //   var height = $(window).scrollTop();
+  //   if (height > 100) {
+  //     $(".closeBtn").fadeIn();
+  //   } else {
+  //     $(".closeBtn").fadeOut();
+  //   }
+  // });
 
   $("#date-button").click(() => {
     $("#date-section").toggle();
@@ -37,6 +37,103 @@ $(document).ready(function() {
   });
   $("#b3").click(() => {
     $("#category-section").hide();
+  });
+
+  var config = {
+    ".chosen-select": {},
+    ".chosen-select-deselect": {
+      allow_single_deselect: true
+    },
+    ".chosen-select-no-single": {
+      disable_search_threshold: 10
+    },
+    ".chosen-select-no-results": {
+      no_results_text: "Oops, No Events Found!"
+    },
+    ".chosen-select-width": {
+      width: "95%"
+    }
+  };
+
+  for (var selector in config) {
+    $(selector).chosen(config[selector]);
+  }
+  $("#date-confirm-button").on("click", function(event) {
+    event.preventDefault();
+
+    // Form validation
+    function validateForm() {
+      var isValid = true;
+      $(".form-control").each(function() {
+        if ($(this).val() === "") {
+          isValid = false;
+        }
+      });
+
+      //   $(".chosen-select").each(function() {
+      //     if ($(this).val() === "") {
+      //       isValid = false;
+      //     }
+      //   });
+
+      var questionLenghts = $(".chosen-select").length;
+      console.log(questionLenghts);
+      for (var i = 0; i < questionLenghts; i++) {
+        if (
+          $(".chosen-select")
+            .eq(i)
+            .val() === ""
+        ) {
+          isValid = false;
+        }
+      }
+      return isValid;
+    }
+
+    // If all required fields are filled
+    if (validateForm()) {
+      // Create an object for the user"s data
+      var userData = {
+        name: $("#name")
+          .val()
+          .trim()
+          .toLowerCase(),
+        gender: $("#gender").val(),
+        photo: $("#photo")
+          .val()
+          .trim(),
+        scores: [
+          parseInt($("#q1").val()),
+          parseInt($("#q2").val()),
+          parseInt($("#q3").val()),
+          parseInt($("#q4").val()),
+          parseInt($("#q5").val()),
+          parseInt($("#q6").val()),
+          parseInt($("#q7").val()),
+          parseInt($("#q8").val()),
+          parseInt($("#q9").val()),
+          parseInt($("#q10").val())
+        ]
+      };
+
+      // AJAX post the data to the friends API.
+
+      if ($("#gender").val() == "male") {
+        $.post("/api/friendsmale", userData, function(data) {
+          // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+          $("#match-name").text(data.name);
+
+          $("#match-img").attr({
+            width: "300px",
+            height: "300px",
+            src: data.photo
+          });
+
+          // Show the modal with the best match
+          $("#results-modal").modal("toggle");
+        });
+      }
+    }
   });
 });
 

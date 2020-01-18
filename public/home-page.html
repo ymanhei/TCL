@@ -22,6 +22,14 @@
       href="https://fonts.googleapis.com/css?family=Bangers&display=swap"
       rel="stylesheet"
     />
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css"
+    />
     <link
       rel="stylesheet"
       href="./resources/tiny-date-picker/tiny-date-picker.css"
@@ -37,8 +45,6 @@
       src="https://kit.fontawesome.com/a1562d6d36.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -62,7 +68,9 @@
       </div>
       <div id="Header-buttons">
         <div class="d-flex justify-content-around" id="buttons">
-          <button class="navbutton">See All Events</button>
+          <a href="/events">
+            <button class="navbutton">See All Events</button></a
+          >
           <button class="navbutton" id="date-button">Choose A Date</button>
           <button class="navbutton" id="location-button">
             Choose A Location
@@ -92,23 +100,33 @@
           </div>
         </div>
       </div>
-      <div class="row-fluid content-section" id="location-section">
+
+      <div class="" id="location-section">
         <button class="closeBtn" id="b2">CLOSE</button>
         <div class="demo-content">
           <h3 id="address-label">LOOK FOR AN EVENT BASED ON ADDRESS</h3>
-          <select class="chosen-select" id="location-chosen-select">
+
+          <select
+            data-placeholder="Click Here And Find A Location"
+            class="chosen-select"
+            id="location-chosen-select"
+          >
             <option value=""></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
           </select>
         </div>
       </div>
+
       <div class="row-fluid content-section" id="category-section">
         <button class="closeBtn" id="b3">CLOSE</button>
-        <div id="category-select"></div>
+        <div class="demo-content">
+          <select id="category-select">
+            <option value="1">FOOD</option>
+            <option value="2">SPORTS</option>
+            <option value="3">PARTY</option>
+            <option value="4">MUSIC</option>
+            <option value="5">SHOPPING</option>
+          </select>
+        </div>
       </div>
     </div>
     <script src="./resources/tiny-date-picker/dist/tiny-date-picker.min.js"></script>
