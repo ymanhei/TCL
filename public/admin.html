@@ -18,79 +18,99 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
 
+  <style>
+    #m {
+      width: 500px;
+      margin-bottom: 10px;
+      margin: auto;
+    }
+  </style>
+
   <body>
-    <div class="container hidden">
-      <div class="row top-30">
-        <div class="col-md-2 col-sm-2">
-          <a class="btn btn-light" href="/blog">Go to Blog</a>
-        </div>
-        <div class="col-md-2 col-sm-2">
-          <a class="btn btn-light" href="/authors">Manage Authors</a>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">ADD EVENT</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/public/events.html">Events</a>
+          </li>
+        </ul>
       </div>
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form id="new-event">
-            <div class="form-group">
-              <label for="title">Event Title:</label>
-              <input
-                placeholder="Post Title"
-                type="text"
-                class="form-control"
-                id="event-title"
-              />
-              <br />
-              <label for="body">Event Description:</label>
-              <textarea
-                placeholder="Post Body"
-                class="form-control"
-                rows="10"
-                id="event-desc"
-              ></textarea>
-              <label for="datetime">Date & Time:</label>
-              <textarea
-                placeholder="Post Body"
-                class="form-control"
-                rows="1"
-                id="event-dt"
-              ></textarea>
-              <label for="location">Location:</label>
-              <textarea
-                placeholder="Location"
-                class="form-control"
-                rows="1"
-                id="event-loc"
-              ></textarea>
-              <label for="date">Category:</label>
-              <textarea
-                placeholder="Category"
-                class="form-control"
-                rows="1"
-                id="event-cat"
-              ></textarea>
-              <label for="limit">Limit:</label>
-              <textarea
-                placeholder="Limit"
-                class="form-control"
-                rows="1"
-                id="event-limit"
-              ></textarea>
-              <label for="date">ImageURL:</label>
-              <textarea
-                placeholder="URL"
-                class="form-control"
-                rows="1"
-                id="event-imgurl"
-              ></textarea>
-              <br />
+    </nav>
+
+    <div id="m">
+      <br />
+      <form>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Event Title" id="event-name"/>
+          </div>
+        </div>
+        <br />
+
+        <textarea
+          placeholder="Description"
+          class="form-control"
+          rows="5"
+          id="event-desc"
+        ></textarea>
+        <br />
+
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Date & Time" id="event-dt"/>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Location" id="event-loc" />
+          </div>
+        </div>
+        <br />
+
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Category" id="event-cat"/>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Limit" id="event-limit"/>
+          </div>
+        </div>
+        <br />
+
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Image URL" id="event-imgurl"/>
+          </div>
+        </div>
+        <br />
+      </form>
+    
+
               <button
-                type="submit"
+                type="button"
                 class="btn btn-success submit"
                 id="submit-event"
               >
                 Submit
               </button>
             </div>
+          </div>
           </form>
         </div>
       </div>

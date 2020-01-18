@@ -16,7 +16,12 @@ $(document).ready(function() {
   //var authorContainer = $(".author-container");
   // Adding event listeners to the form to create a new object, and the button to delete
   // an Author
-  $(document).on("submit", "#submit-event", handleNewEventSubmit);
+  //$(document).on("submit", "#submit-event", handleNewEventSubmit);
+
+  $("#submit-event").click(function() {
+    handleNewEventSubmit(event);
+  });
+
   //add delete functionality
   console.log(nameInput.val());
   // Getting the initial list of Authors
@@ -33,9 +38,8 @@ $(document).ready(function() {
         .trim()
         .trim()
     ) {
-      return;
     }
-    // Calling the upsertAuthor function and passing in the value of the name input
+    //Calling the upsertAuthor function and passing in the value of the name input
     postEvent({
       activity: nameInput.val().trim(),
       description: descInput.val().trim(),
@@ -45,6 +49,7 @@ $(document).ready(function() {
       limit: limitInput.val().trim()
       //imgurl: imgurlInput.val().trim()
     });
+    console.log(nameInput.val());
   }
 
   console.log(nameInput.val());
@@ -87,7 +92,7 @@ $(document).ready(function() {
         rowsToAdd.push(createAuthorRow(data[i]));
       }
       renderAuthorList(rowsToAdd);
-      nameInput.val("");
+      nameInput.val();
     });
   }
 
