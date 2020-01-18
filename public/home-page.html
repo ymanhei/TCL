@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Event Seeker Home Page</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="css/styles.css"
+      media="screen"
+      title="no title"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Anton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./resources/tiny-date-picker/tiny-date-picker.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./resources/tiny-date-picker/date-range-picker.min.css"
+    />
+
+    <script src="./resources/tiny-date-picker/dist/tiny-date-picker.min.js"></script>
+    <script src="./resources/tiny-date-picker/dist/date-range-picker.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/a1562d6d36.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <video
+      id="videoBG"
+      poster=""
+      src="./resources/home.mp4"
+      autoplay
+      muted
+      loop
+    >
+      <source id="video" src="" type="video/mp4" />
+    </video>
+    <div class="row-fluid d-block" id="toplogodiv">
+      <!-- <i class="fas fa-users"></i> -->
+      <h1>Event Seeker</h1>
+    </div>
+    <div class="wrapper" id="home-page-header">
+      <div id="slogan" class="row-fluid">
+        Find out what is happening around twon and get yourself in!
+      </div>
+      <div id="Header-buttons">
+        <div class="d-flex justify-content-around" id="buttons">
+          <button class="navbutton">See All Events</button>
+          <button class="navbutton" id="date-button">Choose A Date</button>
+          <button class="navbutton" id="location-button">
+            Choose A Location
+          </button>
+          <button class="navbutton" id="category-button">
+            Choose A Category
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper" id="home-page-body">
+      <div class="row-fluid content-section" id="date-section">
+        <button class="closeBtn" id="b1">CLOSE</button>
+        <div class="demo-content">
+          <h3 id="calendar-label">CHOOSE EVENTS BY DATE FROM BELOW</h3>
+          <div class="form-group">
+            <div class="form-field">
+              <input type="text" class="date-example" tabindex="400" />
+              <button
+                type="submit"
+                class="btn btn-warning"
+                id="date-confirm-button"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid content-section" id="location-section">
+        <button class="closeBtn" id="b2">CLOSE</button>
+        <div class="demo-content">
+          <h3 id="address-label">LOOK FOR AN EVENT BASED ON ADDRESS</h3>
+          <select class="chosen-select" id="location-chosen-select">
+            <option value=""></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </div>
+      <div class="row-fluid content-section" id="category-section">
+        <button class="closeBtn" id="b3">CLOSE</button>
+        <div id="category-select"></div>
+      </div>
+    </div>
+    <script src="./resources/tiny-date-picker/dist/tiny-date-picker.min.js"></script>
+    <script src="./resources/tiny-date-picker/dist/date-range-picker.min.js"></script>
+    <script>
+      var TinyDatePicker = DateRangePicker.TinyDatePicker;
+      var dpModal = TinyDatePicker(".date-example");
+    </script>
+    <!-- Custom Script -->
+    <script src="./js/home-page.js" type="text/javascript"></script>
+  </body>
+</html>
