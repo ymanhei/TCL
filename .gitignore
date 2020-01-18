@@ -1,6 +1,6 @@
 # Prerequisites
 *.d
-config/*
+config/config.json
 
 # use npm ci 
 node_modules
