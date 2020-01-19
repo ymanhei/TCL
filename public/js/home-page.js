@@ -70,12 +70,6 @@ $(document).ready(function() {
         }
       });
 
-      //   $(".chosen-select").each(function() {
-      //     if ($(this).val() === "") {
-      //       isValid = false;
-      //     }
-      //   });
-
       var questionLenghts = $(".chosen-select").length;
       console.log(questionLenghts);
       for (var i = 0; i < questionLenghts; i++) {
@@ -117,22 +111,6 @@ $(document).ready(function() {
       };
 
       // AJAX post the data to the friends API.
-
-      if ($("#gender").val() == "male") {
-        $.post("/api/friendsmale", userData, function(data) {
-          // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-          $("#match-name").text(data.name);
-
-          $("#match-img").attr({
-            width: "300px",
-            height: "300px",
-            src: data.photo
-          });
-
-          // Show the modal with the best match
-          $("#results-modal").modal("toggle");
-        });
-      }
     }
   });
 });

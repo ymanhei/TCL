@@ -12,10 +12,8 @@ body {
   /* border: 5px solid green; */
 }
 #toplogodiv {
-
   padding-top: 20px;
   /* height: 200px; */
-
 
   background-size: cover;
   background-color: #ffe53b;
@@ -228,4 +226,8 @@ h1 {
   padding: 0 0 0 10px !important;
 
   box-shadow: none !important;
+}
+
+.event-box {
+  padding: 20px;
 }
