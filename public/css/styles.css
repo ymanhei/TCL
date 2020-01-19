@@ -229,3 +229,13 @@ h1 {
 
   box-shadow: none !important;
 }
+
+
+.event-box {
+  padding: 20px;
+  display: inline-block !important;
+}
+.card-img {
+  height: 200px !important;
+}
+
