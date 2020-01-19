@@ -71,13 +71,37 @@ $(document).ready(function() {
   function initializeEventRows() {
     eventsContainer.empty();
     var eventsToAdd = [];
+    eventsToAdd.push(
+      {
+        imageUrl:
+          "https://www.lakecrackenback.com.au/wp-content/uploads/2019/02/biking-01.jpg",
+        activity: "mountain biking",
+        category: "outdoors",
+        description:
+          "riding down rocks and cliffs and stuff with big ting bikes",
+        location: "Austin",
+        date: "2020-01-19T09:00:00.000Z"
+      },
+      {
+        imageUrl:
+          "https://www.salomon.com/sites/default/files/styles/crop_image_large_standard_mobile/public/paragraphs/cta/2019-08/Hiking-mobile%20V2_1.jpg?itok=f1Hs6x5D",
+        activity: "mountain climbing",
+        category: "outdoors",
+        description:
+          "falling down rocks and cliffs and stuff with big ting packs",
+        location: "Perth",
+        date: "2020-01-19T09:00:00.000Z"
+      }
+    );
     for (let i = 0; i < eventsResult.length; i++) {
       eventsToAdd.append(createEachEvent(eventsResult[i]));
     }
+
     eventsContainer.append(eventsToAdd);
   }
 
   function createEachEvent(event) {
+    var eventsContainer = $("#events-container");
     var newEventBox = $("<div>");
     newEventBox.addClass("event-box col-12 col-md-6 col-lg-4 col-xl-3");
     var newEventCard = $("<div>");
@@ -126,6 +150,8 @@ $(document).ready(function() {
       .append(newEventCardGroupSize);
     newEventCard.append(newEventCardButtons);
     newEventCardButtons.append(joinEventButton).append(exitEventButton);
+    eventsContainer.append(newEventBox);
+    eventsContainer.text("hello");
   }
 
   // function submitPost(post) {
