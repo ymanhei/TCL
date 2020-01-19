@@ -230,4 +230,8 @@ h1 {
 
 .event-box {
   padding: 20px;
+  display: inline-block !important;
+}
+.card-img {
+  height: 200px !important;
 }
