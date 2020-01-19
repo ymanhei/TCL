@@ -128,35 +128,35 @@ $(document).ready(function() {
     newEventCardButtons.append(joinEventButton).append(exitEventButton);
   }
 
-  function submitPost(post) {
-    $.post("/api/posts", post, function() {
-      window.location.href = "/blog";
-    });
-  }
+  // function submitPost(post) {
+  //   $.post("/api/posts", post, function() {
+  //     window.location.href = "/blog";
+  //   });
+  // }
 
   // Gets post data for the current post if we're editing, or if we're adding to an author's existing posts
 
   // A function to get Authors and then render our list of Authors
-  function getAuthors() {
-    $.get("/api/authors", renderAuthorList);
-  }
+  // function getAuthors() {
+  //   $.get("/api/authors", renderAuthorList);
+  // }
   // Function to either render a list of authors, or if there are none, direct the user to the page
   // to create an author first
-  function renderAuthorList(data) {
-    if (!data.length) {
-      window.location.href = "/authors";
-    }
-    $(".hidden").removeClass("hidden");
-    var rowsToAdd = [];
-    for (var i = 0; i < data.length; i++) {
-      rowsToAdd.push(createAuthorRow(data[i]));
-    }
-    authorSelect.empty();
-    console.log(rowsToAdd);
-    console.log(authorSelect);
-    authorSelect.append(rowsToAdd);
-    authorSelect.val(authorId);
-  }
+  // function renderAuthorList(data) {
+  //   if (!data.length) {
+  //     window.location.href = "/authors";
+  //   }
+  //   $(".hidden").removeClass("hidden");
+  //   var rowsToAdd = [];
+  //   for (var i = 0; i < data.length; i++) {
+  //     rowsToAdd.push(createAuthorRow(data[i]));
+  //   }
+  //   authorSelect.empty();
+  //   console.log(rowsToAdd);
+  //   console.log(authorSelect);
+  //   authorSelect.append(rowsToAdd);
+  //   authorSelect.val(authorId);
+  // }
 
   // Update a given post, bring user to the blog page when done
   // function updatePost(post) {
