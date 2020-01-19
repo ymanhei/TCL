@@ -3,14 +3,8 @@ $(document).ready(function() {
   $("#location-section").hide();
   $("#category-section").hide();
 
-  // $(window).scroll(function() {
-  //   var height = $(window).scrollTop();
-  //   if (height > 100) {
-  //     $(".closeBtn").fadeIn();
-  //   } else {
-  //     $(".closeBtn").fadeOut();
-  //   }
-  // });
+
+ 
 
   $("#date-button").click(() => {
     $("#date-section").toggle();
@@ -111,6 +105,7 @@ $(document).ready(function() {
       };
 
       // AJAX post the data to the friends API.
+
     }
   });
 });
