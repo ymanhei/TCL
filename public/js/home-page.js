@@ -3,8 +3,14 @@ $(document).ready(function() {
   $("#location-section").hide();
   $("#category-section").hide();
 
-
- 
+  // $(window).scroll(function() {
+  //   var height = $(window).scrollTop();
+  //   if (height > 100) {
+  //     $(".closeBtn").fadeIn();
+  //   } else {
+  //     $(".closeBtn").fadeOut();
+  //   }
+  // });
 
   $("#date-button").click(() => {
     $("#date-section").toggle();
@@ -64,6 +70,12 @@ $(document).ready(function() {
         }
       });
 
+      //   $(".chosen-select").each(function() {
+      //     if ($(this).val() === "") {
+      //       isValid = false;
+      //     }
+      //   });
+
       var questionLenghts = $(".chosen-select").length;
       console.log(questionLenghts);
       for (var i = 0; i < questionLenghts; i++) {
@@ -106,8 +118,40 @@ $(document).ready(function() {
 
       // AJAX post the data to the friends API.
 
+      if ($("#gender").val() == "male") {
+        $.post("/api/friendsmale", userData, function(data) {
+          // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+          $("#match-name").text(data.name);
+
+          $("#match-img").attr({
+            width: "300px",
+            height: "300px",
+            src: data.photo
+          });
+
+          // Show the modal with the best match
+          $("#results-modal").modal("toggle");
+        });
+      }
     }
   });
+
+  $('#category-select').on('change', function() {
+    //alert( this.value );
+    window.location.href="events/?category=" + $("#category-select option:selected").text();
+  });
+
+  $('.chosen-search input').on('change', function() {
+    //alert( this.value );
+    window.location.href="events/?location=" + $(".chosen-search input").val();
+    
+  });
+
+  $('#date-confirm-button').on('click', function() {
+    //alert( this.value );
+    window.location.href="events/?date=" + moment($(".date-example").val()).format("YYYY-MM-DD");   
+  });
+
 });
 
 /* global moment */
