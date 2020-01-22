@@ -100,8 +100,11 @@ $(document).ready(function() {
     newEventCardDetailList.addClass("list-group list-group-flush");
     var newEventCardDate = $("<li>");
     newEventCardDate.addClass("list-group-item");
-    newEventCardDate.text(event.datetime);
-    console.log(event.datetime);
+    var displayDate = moment(event.datetime, "YYYY-MM-DD").format(
+      "Do MMMM YYYY"
+    );
+    newEventCardDate.text(displayDate);
+
     var newEventCardLocation = $("<li>");
     newEventCardLocation.addClass("list-group-item");
     newEventCardLocation.text(event.location);
