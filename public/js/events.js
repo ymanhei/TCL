@@ -4,6 +4,16 @@ $(document).ready(function() {
   var eventsResult;
   // var updating = false;
   var eventsContainer = $("#events-container");
+
+  $.get("/api/events",function(data){
+    let (i=0; i <data.lengths; i++}{
+      $("#location-chosen-select").append(`<option value="">${data[i].location}</option>`)
+    })
+
+  })
+
+
+
   if (url.indexOf("?date=") !== -1) {
     dataDetail = url.split("=")[1];
     console.log(dataDetail);
