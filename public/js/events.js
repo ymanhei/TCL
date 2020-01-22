@@ -6,8 +6,10 @@ $(document).ready(function() {
   var eventsContainer = $("#events-container");
 
   $.get("/api/events",function(data){
-    let (i=0; i <data.lengths; i++}{
-      $("#location-chosen-select").append(`<option value="">${data[i].location}</option>`)
+    var locationDropDownMenu = $("#location-chosen-select");
+    for (i=0; i <data.lengths; i++){
+    
+     locationDropDownMenu.append(`<option value="">${data[i].location}</option>`)
     })
 
   })
