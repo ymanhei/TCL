@@ -24,10 +24,11 @@ $(document).ready(function() {
     var typeDetail;
     dataDetail = data || "";
     typeDetail = type || "";
-    console.log(dataDetail);
+
     console.log(typeDetail);
     switch (typeDetail) {
       case "date":
+        console.log(dataDetail);
         queryUrl = "/?date=" + dataDetail;
         break;
       case "location":
@@ -44,6 +45,7 @@ $(document).ready(function() {
       console.log(queryUrl);
       console.log("Events", data);
       eventsResult = data;
+      console.log(eventsResult);
       if (!eventsResult || eventsResult.lengths === 0) {
         displayEmpty(type);
       } else {
