@@ -54,6 +54,7 @@ $(document).ready(function() {
     });
   }
   function displayEmpty(type) {
+    console.log("here");
     var partial = "";
     if (type) {
       partial = "For This " + type;
