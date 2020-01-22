@@ -1,4 +1,20 @@
 $(document).ready(function() {
+  $.get("/api/events", function(data) {
+    console.log(data);
+    console.log("?");
+    var locationDropDownMenu = $("#location-chosen-select");
+    for (i = 0; i < data.length; i++) {
+      console.log(data[i].location);
+
+      locationDropDownMenu.append(createLocationMenu(data[i]));
+    }
+  });
+
+  function createLocationMenu(location) {
+    var menuOption = $("<option>");
+    menuOption.attr("value", location);
+    menuOption.html(location);
+  }
   $("#date-section").hide();
   $("#location-section").hide();
   $("#category-section").hide();
