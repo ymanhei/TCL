@@ -101,6 +101,7 @@ $(document).ready(function() {
     var newEventCardDate = $("<li>");
     newEventCardDate.addClass("list-group-item");
     newEventCardDate.text(event.datetime);
+    console.log(event.datetime);
     var newEventCardLocation = $("<li>");
     newEventCardLocation.addClass("list-group-item");
     newEventCardLocation.text(event.location);
