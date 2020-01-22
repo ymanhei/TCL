@@ -7,11 +7,11 @@ $(document).ready(function() {
 
   $.get("/api/events", function(data) {
     var locationDropDownMenu = $("#location-chosen-select");
-    for (i = 0; i < data.lengths; i++) {
+    for (i = 0; i < data.length; i++) {
       console.log(data[i].location);
 
       locationDropDownMenu.append(
-        `<option value="">${data[i].location}</option>`
+        `<option value=${data[i].location}>${data[i].location}</option>`
       );
     }
   });
