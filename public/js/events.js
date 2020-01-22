@@ -5,16 +5,16 @@ $(document).ready(function() {
   // var updating = false;
   var eventsContainer = $("#events-container");
 
-  $.get("/api/events",function(data){
+  $.get("/api/events", function(data) {
     var locationDropDownMenu = $("#location-chosen-select");
-    for (i=0; i <data.lengths; i++){
-    
-     locationDropDownMenu.append(`<option value="">${data[i].location}</option>`)
-    })
+    for (i = 0; i < data.lengths; i++) {
+      console.log(data[i].location);
 
-  })
-
-
+      locationDropDownMenu.append(
+        `<option value="">${data[i].location}</option>`
+      );
+    }
+  });
 
   if (url.indexOf("?date=") !== -1) {
     dataDetail = url.split("=")[1];
