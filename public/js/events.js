@@ -100,7 +100,7 @@ $(document).ready(function() {
     newEventCardDetailList.addClass("list-group list-group-flush");
     var newEventCardDate = $("<li>");
     newEventCardDate.addClass("list-group-item");
-    newEventCardDate.text(event.date);
+    newEventCardDate.text(event.datetime);
     var newEventCardLocation = $("<li>");
     newEventCardLocation.addClass("list-group-item");
     newEventCardLocation.text(event.location);
