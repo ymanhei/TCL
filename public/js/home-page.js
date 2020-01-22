@@ -12,8 +12,8 @@ $(document).ready(function() {
 
   function createLocationMenu(location) {
     var menuOption = $("<option>");
-    menuOption.attr("value", location);
-    menuOption.html(location);
+    menuOption.value(location);
+    menuOption.text(location);
   }
   $("#date-section").hide();
   $("#location-section").hide();
