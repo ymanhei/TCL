@@ -44,9 +44,8 @@ $(document).ready(function() {
     $.get("/api/events" + queryUrl, function(data) {
       console.log(queryUrl);
       console.log("Events", data);
-      eventsResult = data || "";
-      console.log(eventsResult);
-      if (eventsResult.lengths === 0) {
+
+      if (!data) {
         console.log("here?");
         displayEmpty(type);
       } else {
