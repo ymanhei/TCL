@@ -11,7 +11,7 @@ module.exports = function(app) {
     } else if (req.query.category) {
       query.category = req.query.category;
     } else if (req.query.date) {
-      query.date = req.query.date;
+      query.datetime = req.query.date;
     } else if (req.query.location) {
       query.location = req.query.location;
     }
