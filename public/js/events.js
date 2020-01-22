@@ -46,7 +46,7 @@ $(document).ready(function() {
       console.log("Events", data);
       eventsResult = data || "";
       console.log(eventsResult);
-      if (!eventsResult || eventsResult.lengths === 0) {
+      if (!eventsResult || eventsResult.lengths == 0) {
         displayEmpty(type);
       } else {
         initializeEventRows();
