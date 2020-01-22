@@ -124,6 +124,7 @@ $(document).ready(function() {
     newEventCardDescription.append(descriptionText);
     newEventCard.append(newEventCardDetailList);
     newEventCardDetailList
+      .append(newEventCardDate)
       .append(newEventCardLocation)
       .append(newEventCardCategory)
       .append(newEventCardGroupSize);
