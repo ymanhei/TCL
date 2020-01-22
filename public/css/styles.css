@@ -213,6 +213,7 @@ h1 {
 
 .chosen-single {
   border: none !important;
+  height: auto !important;
 }
 .chosen-single span {
   padding-top: 20px;
