@@ -14,8 +14,14 @@ module.exports = function(app) {
   // GET route for getting all of the events
   app.get("/api/events", function(req, res) {
     var query = {};
-    if (req.query.user_id) {
-      query.userid = req.query.user_id;
+    if (req.query.id) {
+      query.id = req.query.id;
+    } else if (req.query.category) {
+      query.category = req.query.category;
+    } else if (req.query.date) {
+      query.date = req.query.date;
+    } else if (req.query.location) {
+      query.location = req.query.location;
     }
     // Here we add an "include" property to our options in our findAll query
     // We set the value to an array of the models we want to include in a left outer join
@@ -61,7 +67,7 @@ module.exports = function(app) {
     // Here we add an "include" property to our options in our findOne query
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.User
-    console.log("category:",req.params.category);
+    console.log("category:", req.params.category);
     db.Event.findAll({
       where: {
         category: req.params.category
@@ -77,8 +83,7 @@ module.exports = function(app) {
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.User
     db.Event.findAll({
-      where: 
-        sq.where(sq.fn('date', sq.col('datetime')), req.params.date),
+      where: sq.where(sq.fn("date", sq.col("datetime")), req.params.date),
       include: [db.User]
     }).then(function(dbEvent) {
       res.json(dbEvent);

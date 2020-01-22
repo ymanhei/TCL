@@ -12,10 +12,8 @@ body {
   /* border: 5px solid green; */
 }
 #toplogodiv {
-
   padding-top: 20px;
   /* height: 200px; */
-
 
   background-size: cover;
   background-color: #ffe53b;
@@ -230,7 +228,6 @@ h1 {
   box-shadow: none !important;
 }
 
-
 .event-box {
   padding: 20px;
   display: inline-block !important;
@@ -238,4 +235,3 @@ h1 {
 .card-img {
   height: 200px !important;
 }
-
