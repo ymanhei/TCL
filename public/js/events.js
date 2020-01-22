@@ -6,15 +6,21 @@ $(document).ready(function() {
   var eventsContainer = $("#events-container");
 
   $.get("/api/events", function(data) {
+    console.log(data);
+    console.log("?");
     var locationDropDownMenu = $("#location-chosen-select");
     for (i = 0; i < data.length; i++) {
       console.log(data[i].location);
 
-      locationDropDownMenu.append(
-        `<option value=${data[i].location}>${data[i].location}</option>`
-      );
+      locationDropDownMenu.append(createLocationMenu(data[i]));
     }
   });
+
+  function createLocationMenu(location) {
+    var menuOption = $("<option>");
+    menuOption.attr("value", location);
+    menuOption.html(location);
+  }
 
   if (url.indexOf("?date=") !== -1) {
     dataDetail = url.split("=")[1];
