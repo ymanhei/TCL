@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
       len: [1, 140]
     },
     datetime: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false
     },
     limit: {
