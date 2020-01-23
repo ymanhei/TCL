@@ -213,7 +213,10 @@ h1 {
 
 .chosen-single {
   border: none !important;
+  background: none !important;
   height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 .chosen-single span {
   padding-top: 20px;
@@ -235,4 +238,22 @@ h1 {
 }
 .card-img {
   height: 200px !important;
+}
+
+#location-submit {
+  margin-top: 30px;
+  width: 20%;
+  position: relative;
+  left: 40%;
+}
+
+#event-page {
+  background-image: url(../resources/eventpage.jpg);
+  background-attachment: scroll;
+}
+#event-page-button {
+}
+
+.container blog {
+  margin-top: 50px;
 }

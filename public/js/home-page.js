@@ -1,20 +1,34 @@
 $(document).ready(function() {
+  var locationDropDownMenu = $("#location-chosen-select");
+  // locationDropDownMenu.empty();
+
+  // locationDropDownMenu.append(
+  //   $("<option>")
+  //     .val("what")
+  //     .text("what")
+  // );
   $.get("/api/events", function(data) {
     console.log(data);
     console.log("?");
-    var locationDropDownMenu = $("#location-chosen-select");
-    for (i = 0; i < data.length; i++) {
-      console.log(data[i].location);
 
-      locationDropDownMenu.append(createLocationMenu(data[i]));
+    for (let i = 0; i < data.length; i++) {
+      console.log(data[i].location);
+      locationDropDownMenu
+        .append(
+          $("<option>")
+            .val(data[i].location)
+            .text(data[i].location)
+        )
+        .trigger("chosen:updated");
     }
   });
 
-  function createLocationMenu(location) {
-    var menuOption = $("<option>");
-    menuOption.value(location);
-    menuOption.text(location);
-  }
+  // function createLocationMenu(location) {
+  //   var menuOption = $("<option>");
+  //   menuOption.attr("value", location);
+  //   menuOption.text(location);
+  // }
+
   $("#date-section").hide();
   $("#location-section").hide();
   $("#category-section").hide();
@@ -91,14 +105,18 @@ $(document).ready(function() {
 
   $("#category-select").on("change", function() {
     //alert( this.value );
+
     window.location.href =
-      "events/?category=" + $("#category-select option:selected").text();
+      "events/?category=" +
+      $("#category-select option:selected")
+        .text()
+        .toLowerCase();
   });
 
-  $(".chosen-search input").on("change", function() {
+  $("#location-submit").on("click", function() {
     //alert( this.value );
     window.location.href =
-      "events/?location=" + $(".chosen-search input").val();
+      "events/?location=" + $("#location-chosen-select").val();
   });
 
   $("#date-confirm-button").on("click", function() {

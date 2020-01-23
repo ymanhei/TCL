@@ -1,8 +1,11 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.DateRangePicker = {})));
-}(this, (function (exports) { 'use strict';
+(function(global, factory) {
+  typeof exports === "object" && typeof module !== "undefined"
+    ? factory(exports)
+    : typeof define === "function" && define.amd
+    ? define(["exports"], factory)
+    : factory((global.DateRangePicker = {}));
+})(this, function(exports) {
+  "use strict";
 
   /**
    * @file A generic set of mutation-free date functions.
@@ -113,8 +116,8 @@
    * @returns {function}
    */
   function dateOrParse(parse) {
-    return function (dt) {
-      return dropTime(typeof dt === 'string' ? parse(dt) : dt);
+    return function(dt) {
+      return dropTime(typeof dt === "string" ? parse(dt) : dt);
     };
   }
 
@@ -128,9 +131,7 @@
    * @returns {Date}
    */
   function constrainDate(dt, min, max) {
-    return (dt < min) ? min :
-           (dt > max) ? max :
-           dt;
+    return dt < min ? min : dt > max ? max : dt;
   }
 
   function dropTime(dt) {
@@ -152,7 +153,7 @@
    */
   function bufferFn(ms, fn) {
     var timeout = undefined;
-    return function () {
+    return function() {
       clearTimeout(timeout);
       timeout = setTimeout(fn, ms);
     };
@@ -161,7 +162,7 @@
   /**
    * noop is a function which does nothing at all.
    */
-  function noop() { }
+  function noop() {}
 
   /**
    * copy properties from object o2 to object o1.
@@ -187,24 +188,24 @@
    */
 
   var english = {
-    days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     months: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ],
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Close',
+    today: "Today",
+    clear: "Clear",
+    close: "Close"
   };
 
   /**
@@ -233,24 +234,24 @@
       lang: english,
 
       // Possible values: dp-modal, dp-below, dp-permanent
-      mode: 'dp-modal',
+      mode: "dp-modal",
 
       // The date to hilight initially if the date picker has no
       // initial value.
       hilightedDate: now(),
 
-      format: function (dt) {
-        return (dt.getMonth() + 1) + '/' + dt.getDate() + '/' + dt.getFullYear();
+      format: function(dt) {
+        return dt.getMonth() + 1 + "/" + dt.getDate() + "/" + dt.getFullYear();
       },
 
-      parse: function (str) {
+      parse: function(str) {
         var date = new Date(str);
         return isNaN(date) ? now() : date;
       },
 
-      dateClass: function () { },
+      dateClass: function() {},
 
-      inRange: function () {
+      inRange: function() {
         return true;
       }
     };
@@ -259,7 +260,7 @@
   function makeInRangeFn(opts) {
     var inRange = opts.inRange; // Cache this version, and return a variant
 
-    return function (dt, dp) {
+    return function(dt, dp) {
       return inRange(dt, dp) && opts.min <= dt && opts.max >= dt;
     };
   }
@@ -274,7 +275,7 @@
     right: 39,
     down: 40,
     enter: 13,
-    esc: 27,
+    esc: 27
   };
 
   /**
@@ -289,7 +290,7 @@
   function on(evt, el, handler) {
     el.addEventListener(evt, handler, true);
 
-    return function () {
+    return function() {
       el.removeEventListener(evt, handler, true);
     };
   }
@@ -299,11 +300,20 @@
   function shimCustomEvent() {
     var CustomEvent = window.CustomEvent;
 
-    if (typeof CustomEvent !== 'function') {
-      CustomEvent = function (event, params) {
-        params = params || {bubbles: false, cancelable: false, detail: undefined};
-        var evt = document.createEvent('CustomEvent');
-        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+    if (typeof CustomEvent !== "function") {
+      CustomEvent = function(event, params) {
+        params = params || {
+          bubbles: false,
+          cancelable: false,
+          detail: undefined
+        };
+        var evt = document.createEvent("CustomEvent");
+        evt.initCustomEvent(
+          event,
+          params.bubbles,
+          params.cancelable,
+          params.detail
+        );
         return evt;
       };
 
@@ -320,14 +330,14 @@
   var dayPicker = {
     onKeyDown: keyDown,
     onClick: {
-      'dp-day': selectDay,
-      'dp-next': gotoNextMonth,
-      'dp-prev': gotoPrevMonth,
-      'dp-today': selectToday,
-      'dp-clear': clear,
-      'dp-close': close,
-      'dp-cal-month': showMonthPicker,
-      'dp-cal-year': showYearPicker,
+      "dp-day": selectDay,
+      "dp-next": gotoNextMonth,
+      "dp-prev": gotoPrevMonth,
+      "dp-today": selectToday,
+      "dp-clear": clear,
+      "dp-close": close,
+      "dp-cal-month": showMonthPicker,
+      "dp-cal-year": showYearPicker
     },
     render: render
   };
@@ -351,47 +361,61 @@
 
     return (
       '<div class="dp-cal">' +
-        '<header class="dp-cal-header">' +
-          '<button tabindex="-1" type="button" class="dp-prev">Prev</button>' +
-          '<button tabindex="-1" type="button" class="dp-cal-month">' +
-            lang.months[hilightedMonth] +
-          '</button>' +
-          '<button tabindex="-1" type="button" class="dp-cal-year">' +
-            hilightedDate.getFullYear() +
-          '</button>' +
-          '<button tabindex="-1" type="button" class="dp-next">Next</button>' +
-        '</header>' +
-        '<div class="dp-days">' +
-          dayNames.map(function (name, i) {
-            return (
-              '<span class="dp-col-header">' + dayNames[(i + dayOffset) % dayNames.length] + '</span>'
-            );
-          }).join('') +
-          mapDays(hilightedDate, dayOffset, function (date) {
-            var isNotInMonth = date.getMonth() !== hilightedMonth;
-            var isDisabled = !opts.inRange(date);
-            var isToday = date.getTime() === today;
-            var className = 'dp-day';
-            className += (isNotInMonth ? ' dp-edge-day' : '');
-            className += (datesEq(date, hilightedDate) ? ' dp-current' : '');
-            className += (datesEq(date, selectedDate) ? ' dp-selected' : '');
-            className += (isDisabled ? ' dp-day-disabled' : '');
-            className += (isToday ? ' dp-day-today' : '');
-            className += ' ' + opts.dateClass(date, dp);
+      '<header class="dp-cal-header">' +
+      '<button tabindex="-1" type="button" class="dp-prev">Prev</button>' +
+      '<button tabindex="-1" type="button" class="dp-cal-month">' +
+      lang.months[hilightedMonth] +
+      "</button>" +
+      '<button tabindex="-1" type="button" class="dp-cal-year">' +
+      hilightedDate.getFullYear() +
+      "</button>" +
+      '<button tabindex="-1" type="button" class="dp-next">Next</button>' +
+      "</header>" +
+      '<div class="dp-days">' +
+      dayNames
+        .map(function(name, i) {
+          return (
+            '<span class="dp-col-header">' +
+            dayNames[(i + dayOffset) % dayNames.length] +
+            "</span>"
+          );
+        })
+        .join("") +
+      mapDays(hilightedDate, dayOffset, function(date) {
+        var isNotInMonth = date.getMonth() !== hilightedMonth;
+        var isDisabled = !opts.inRange(date);
+        var isToday = date.getTime() === today;
+        var className = "dp-day";
+        className += isNotInMonth ? " dp-edge-day" : "";
+        className += datesEq(date, hilightedDate) ? " dp-current" : "";
+        className += datesEq(date, selectedDate) ? " dp-selected" : "";
+        className += isDisabled ? " dp-day-disabled" : "";
+        className += isToday ? " dp-day-today" : "";
+        className += " " + opts.dateClass(date, dp);
 
-            return (
-              '<button tabindex="-1" type="button" class="' + className + '" data-date="' + date.getTime() + '">' +
-                date.getDate() +
-              '</button>'
-            );
-          }) +
-        '</div>' +
-        '<footer class="dp-cal-footer">' +
-          '<button tabindex="-1" type="button" class="dp-today">' + lang.today + '</button>' +
-          '<button tabindex="-1" type="button" class="dp-clear">' + lang.clear + '</button>' +
-          '<button tabindex="-1" type="button" class="dp-close">' + lang.close + '</button>' +
-        '</footer>' +
-      '</div>'
+        return (
+          '<button tabindex="-1" type="button" class="' +
+          className +
+          '" data-date="' +
+          date.getTime() +
+          '">' +
+          date.getDate() +
+          "</button>"
+        );
+      }) +
+      "</div>" +
+      '<footer class="dp-cal-footer">' +
+      '<button tabindex="-1" type="button" class="dp-today">' +
+      lang.today +
+      "</button>" +
+      '<button tabindex="-1" type="button" class="dp-clear">' +
+      lang.clear +
+      "</button>" +
+      '<button tabindex="-1" type="button" class="dp-close">' +
+      lang.close +
+      "</button>" +
+      "</footer>" +
+      "</div>"
     );
   }
 
@@ -404,11 +428,15 @@
   function keyDown(e, dp) {
     var key = e.keyCode;
     var shiftBy =
-      (key === Key.left) ? -1 :
-      (key === Key.right) ? 1 :
-      (key === Key.up) ? -7 :
-      (key === Key.down) ? 7 :
-      0;
+      key === Key.left
+        ? -1
+        : key === Key.right
+        ? 1
+        : key === Key.up
+        ? -7
+        : key === Key.down
+        ? 7
+        : 0;
 
     if (key === Key.esc) {
       dp.close();
@@ -422,13 +450,13 @@
 
   function selectToday(e, dp) {
     dp.setState({
-      selectedDate: now(),
+      selectedDate: now()
     });
   }
 
   function clear(e, dp) {
     dp.setState({
-      selectedDate: null,
+      selectedDate: null
     });
   }
 
@@ -438,13 +466,13 @@
 
   function showMonthPicker(e, dp) {
     dp.setState({
-      view: 'month'
+      view: "month"
     });
   }
 
   function showYearPicker(e, dp) {
     dp.setState({
-      view: 'year'
+      view: "year"
     });
   }
 
@@ -464,12 +492,12 @@
 
   function selectDay(e, dp) {
     dp.setState({
-      selectedDate: new Date(parseInt(e.target.getAttribute('data-date'))),
+      selectedDate: new Date(parseInt(e.target.getAttribute("data-date")))
     });
   }
 
   function mapDays(currentDate, dayOffset, fn) {
-    var result = '';
+    var result = "";
     var iter = new Date(currentDate);
     iter.setDate(1);
     iter.setDate(1 - iter.getDay() + dayOffset);
@@ -483,7 +511,7 @@
 
     // We are going to have 6 weeks always displayed to keep a consistent
     // calendar size
-    for (var day = 0; day < (6 * 7); ++day) {
+    for (var day = 0; day < 6 * 7; ++day) {
       result += fn(iter);
       iter.setDate(iter.getDate() + 1);
     }
@@ -498,15 +526,18 @@
   var monthPicker = {
     onKeyDown: keyDown$1,
     onClick: {
-      'dp-month': onChooseMonth
+      "dp-month": onChooseMonth
     },
     render: render$1
   };
 
   function onChooseMonth(e, dp) {
     dp.setState({
-      hilightedDate: setMonth(dp.state.hilightedDate, parseInt(e.target.getAttribute('data-month'))),
-      view: 'day',
+      hilightedDate: setMonth(
+        dp.state.hilightedDate,
+        parseInt(e.target.getAttribute("data-month"))
+      ),
+      view: "day"
     });
   }
 
@@ -525,17 +556,23 @@
 
     return (
       '<div class="dp-months">' +
-        months.map(function (month, i) {
-          var className = 'dp-month';
-          className += (currentMonth === i ? ' dp-current' : '');
+      months
+        .map(function(month, i) {
+          var className = "dp-month";
+          className += currentMonth === i ? " dp-current" : "";
 
           return (
-            '<button tabindex="-1" type="button" class="' + className + '" data-month="' + i + '">' +
-              month +
-            '</button>'
+            '<button tabindex="-1" type="button" class="' +
+            className +
+            '" data-month="' +
+            i +
+            '">' +
+            month +
+            "</button>"
           );
-        }).join('') +
-      '</div>'
+        })
+        .join("") +
+      "</div>"
     );
   }
 
@@ -543,20 +580,24 @@
    * keyDown handles keydown events that occur in the month picker
    *
    * @param {Event} e
-  * @param {DatePickerContext} dp
+   * @param {DatePickerContext} dp
    */
   function keyDown$1(e, dp) {
     var key = e.keyCode;
     var shiftBy =
-      (key === Key.left) ? -1 :
-      (key === Key.right) ? 1 :
-      (key === Key.up) ? -3 :
-      (key === Key.down) ? 3 :
-      0;
+      key === Key.left
+        ? -1
+        : key === Key.right
+        ? 1
+        : key === Key.up
+        ? -3
+        : key === Key.down
+        ? 3
+        : 0;
 
     if (key === Key.esc) {
       dp.setState({
-        view: 'day',
+        view: "day"
       });
     } else if (shiftBy) {
       e.preventDefault();
@@ -574,8 +615,8 @@
     render: render$2,
     onKeyDown: keyDown$2,
     onClick: {
-      'dp-year': onChooseYear
-    },
+      "dp-year": onChooseYear
+    }
   };
 
   /**
@@ -591,25 +632,32 @@
 
     return (
       '<div class="dp-years">' +
-        mapYears(dp, function (year) {
-          var className = 'dp-year';
-          className += (year === currentYear ? ' dp-current' : '');
-          className += (year === selectedYear ? ' dp-selected' : '');
+      mapYears(dp, function(year) {
+        var className = "dp-year";
+        className += year === currentYear ? " dp-current" : "";
+        className += year === selectedYear ? " dp-selected" : "";
 
-          return (
-            '<button tabindex="-1" type="button" class="' + className + '" data-year="' + year + '">' +
-              year +
-            '</button>'
-          );
-        }) +
-      '</div>'
+        return (
+          '<button tabindex="-1" type="button" class="' +
+          className +
+          '" data-year="' +
+          year +
+          '">' +
+          year +
+          "</button>"
+        );
+      }) +
+      "</div>"
     );
   }
 
   function onChooseYear(e, dp) {
     dp.setState({
-      hilightedDate: setYear(dp.state.hilightedDate, parseInt(e.target.getAttribute('data-year'))),
-      view: 'day',
+      hilightedDate: setYear(
+        dp.state.hilightedDate,
+        parseInt(e.target.getAttribute("data-year"))
+      ),
+      view: "day"
     });
   }
 
@@ -617,26 +665,28 @@
     var key = e.keyCode;
     var opts = dp.opts;
     var shiftBy =
-      (key === Key.left || key === Key.up) ? 1 :
-      (key === Key.right || key === Key.down) ? -1 :
-      0;
+      key === Key.left || key === Key.up
+        ? 1
+        : key === Key.right || key === Key.down
+        ? -1
+        : 0;
 
     if (key === Key.esc) {
       dp.setState({
-        view: 'day',
+        view: "day"
       });
     } else if (shiftBy) {
       e.preventDefault();
       var shiftedYear = shiftYear(dp.state.hilightedDate, shiftBy);
 
       dp.setState({
-        hilightedDate: constrainDate(shiftedYear, opts.min, opts.max),
+        hilightedDate: constrainDate(shiftedYear, opts.min, opts.max)
       });
     }
   }
 
   function mapYears(dp, fn) {
-    var result = '';
+    var result = "";
     var max = dp.opts.max.getFullYear();
 
     for (var i = max; i >= dp.opts.min.getFullYear(); --i) {
@@ -670,18 +720,18 @@
       adjustPosition: noop,
       containerHTML: '<div class="dp"></div>',
 
-      attachToDom: function () {
+      attachToDom: function() {
         document.body.appendChild(dp.el);
       },
 
-      updateInput: function (selectedDate) {
-        var e = new CustomEvent('change', {bubbles: true});
+      updateInput: function(selectedDate) {
+        var e = new CustomEvent("change", { bubbles: true });
         e.simulated = true;
-        input.value = selectedDate ? opts.format(selectedDate) : '';
+        input.value = selectedDate ? opts.format(selectedDate) : "";
         input.dispatchEvent(e);
       },
 
-      computeSelectedDate: function () {
+      computeSelectedDate: function() {
         return opts.parse(input.value);
       },
 
@@ -689,7 +739,7 @@
         return views[dp.state.view];
       },
 
-      open: function () {
+      open: function() {
         if (closing) {
           return;
         }
@@ -699,32 +749,38 @@
           attachContainerEvents(dp);
         }
 
-        selectedDate = constrainDate(dp.computeSelectedDate(), opts.min, opts.max);
+        selectedDate = constrainDate(
+          dp.computeSelectedDate(),
+          opts.min,
+          opts.max
+        );
         dp.state.hilightedDate = selectedDate || opts.hilightedDate;
-        dp.state.view = 'day';
+        dp.state.view = "day";
 
         dp.attachToDom();
         dp.render();
 
-        emit('open');
+        emit("open");
       },
 
-      isVisible: function () {
+      isVisible: function() {
         return !!dp.el && !!dp.el.parentNode;
       },
 
-      hasFocus: function () {
+      hasFocus: function() {
         var focused = document.activeElement;
-        return dp.el &&
+        return (
+          dp.el &&
           dp.el.contains(focused) &&
-          focused.className.indexOf('dp-focuser') < 0;
+          focused.className.indexOf("dp-focuser") < 0
+        );
       },
 
-      shouldHide: function () {
+      shouldHide: function() {
         return dp.isVisible();
       },
 
-      close: function (becauseOfBlur) {
+      close: function(becauseOfBlur) {
         var el = dp.el;
 
         if (!dp.isVisible()) {
@@ -749,15 +805,15 @@
           closing = false;
         }, 100);
 
-        emit('close');
+        emit("close");
       },
 
-      destroy: function () {
+      destroy: function() {
         dp.close();
         detatchInputEvents();
       },
 
-      render: function () {
+      render: function() {
         if (!dp.el) {
           return;
         }
@@ -775,14 +831,14 @@
 
       // Conceptually similar to setState in React, updates
       // the view state and re-renders.
-      setState: function (state) {
+      setState: function(state) {
         for (var key in state) {
           dp.state[key] = state[key];
         }
 
-        emit('statechange');
+        emit("statechange");
         dp.render();
-      },
+      }
     };
 
     detatchInputEvents = attachInputEvents(input, dp);
@@ -809,10 +865,10 @@
           }
 
           dp.updateInput(selectedDate);
-          emit('select');
+          emit("select");
           dp.close();
         },
-        view: 'day',
+        view: "day"
       };
     }
 
@@ -820,7 +876,7 @@
   }
 
   function createContainerElement(opts, containerHTML) {
-    var el = document.createElement('div');
+    var el = document.createElement("div");
 
     el.className = opts.mode;
     el.innerHTML = containerHTML;
@@ -829,7 +885,7 @@
   }
 
   function attachInputEvents(input, dp) {
-    var bufferShow = bufferFn(5, function () {
+    var bufferShow = bufferFn(5, function() {
       if (dp.shouldHide()) {
         dp.close();
       } else {
@@ -838,50 +894,55 @@
     });
 
     var off = [
-      on('blur', input, bufferFn(150, function () {
-        if (!dp.hasFocus()) {
-          dp.close(true);
-        }
-      })),
+      on(
+        "blur",
+        input,
+        bufferFn(150, function() {
+          if (!dp.hasFocus()) {
+            dp.close(true);
+          }
+        })
+      ),
 
-      on('mousedown', input, function () {
+      on("mousedown", input, function() {
         if (input === document.activeElement) {
           bufferShow();
         }
       }),
 
-      on('focus', input, bufferShow),
+      on("focus", input, bufferShow),
 
-      on('input', input, function (e) {
+      on("input", input, function(e) {
         var date = dp.opts.parse(e.target.value);
-        isNaN(date) || dp.setState({
-          hilightedDate: date
-        });
-      }),
+        isNaN(date) ||
+          dp.setState({
+            hilightedDate: date
+          });
+      })
     ];
 
     // Unregister all events that were registered above.
     return function() {
-      off.forEach(function (f) {
+      off.forEach(function(f) {
         f();
       });
     };
   }
 
   function focusCurrent(dp) {
-    var current = dp.el.querySelector('.dp-current');
+    var current = dp.el.querySelector(".dp-current");
     return current && current.focus();
   }
 
   function attachContainerEvents(dp) {
     var el = dp.el;
-    var calEl = el.querySelector('.dp');
+    var calEl = el.querySelector(".dp");
 
     // Hack to get iOS to show active CSS states
     el.ontouchstart = noop;
 
     function onClick(e) {
-      e.target.className.split(' ').forEach(function(evt) {
+      e.target.className.split(" ").forEach(function(evt) {
         var handler = dp.currentView().onClick[evt];
         handler && handler(e, dp);
       });
@@ -893,13 +954,17 @@
     // do we return focus to the input. A possible other approach
     // would be to set context.redrawing = true on redraw and
     // set it to false in the blur event.
-    on('blur', calEl, bufferFn(150, function () {
-      if (!dp.hasFocus()) {
-        dp.close(true);
-      }
-    }));
+    on(
+      "blur",
+      calEl,
+      bufferFn(150, function() {
+        if (!dp.hasFocus()) {
+          dp.close(true);
+        }
+      })
+    );
 
-    on('keydown', el, function (e) {
+    on("keydown", el, function(e) {
       if (e.keyCode === Key.enter) {
         onClick(e);
       } else {
@@ -910,7 +975,7 @@
     // If the user clicks in non-focusable space, but
     // still within the date picker, we don't want to
     // hide, so we need to hack some things...
-    on('mousedown', calEl, function (e) {
+    on("mousedown", calEl, function(e) {
       e.target.focus && e.target.focus(); // IE hack
       if (document.activeElement !== e.target) {
         e.preventDefault();
@@ -918,7 +983,7 @@
       }
     });
 
-    on('click', el, onClick);
+    on("click", el, onClick);
   }
 
   function focusInput(input) {
@@ -962,13 +1027,13 @@
 
     dp.shouldFocusOnBlur = false;
 
-    Object.defineProperty(dp, 'shouldFocusOnRender', {
+    Object.defineProperty(dp, "shouldFocusOnRender", {
       get: function() {
         return input !== document.activeElement;
       }
     });
 
-    dp.adjustPosition = function () {
+    dp.adjustPosition = function() {
       autoPosition(input, dp);
     };
 
@@ -982,7 +1047,7 @@
     adjustCalY(dp, inputPos, win);
     adjustCalX(dp, inputPos, win);
 
-    dp.el.style.visibility = '';
+    dp.el.style.visibility = "";
   }
 
   function adjustCalX(dp, inputPos, win) {
@@ -995,7 +1060,7 @@
     var shiftedLeft = maxRight - offsetWidth;
     var left = calRight > maxRight && shiftedLeft > 0 ? shiftedLeft : inputLeft;
 
-    cal.style.left = left + 'px';
+    cal.style.left = left + "px";
   }
 
   function adjustCalY(dp, inputPos, win) {
@@ -1005,14 +1070,15 @@
     var calHeight = cal.offsetHeight;
     var belowTop = inputTop + inputPos.height + 8;
     var aboveTop = inputTop - calHeight - 8;
-    var isAbove = (aboveTop > 0 && belowTop + calHeight > scrollTop + win.innerHeight);
+    var isAbove =
+      aboveTop > 0 && belowTop + calHeight > scrollTop + win.innerHeight;
     var top = isAbove ? aboveTop : belowTop;
 
     if (cal.classList) {
-      cal.classList.toggle('dp-is-above', isAbove);
-      cal.classList.toggle('dp-is-below', !isAbove);
+      cal.classList.toggle("dp-is-above", isAbove);
+      cal.classList.toggle("dp-is-below", !isAbove);
     }
-    cal.style.top = top + 'px';
+    cal.style.top = top + "px";
   }
 
   /**
@@ -1027,11 +1093,11 @@
     dp.updateInput = noop;
     dp.shouldFocusOnRender = opts.shouldFocusOnRender;
 
-    dp.computeSelectedDate = function () {
+    dp.computeSelectedDate = function() {
       return opts.hilightedDate;
     };
 
-    dp.attachToDom = function () {
+    dp.attachToDom = function() {
       root.appendChild(dp.el);
     };
 
@@ -1047,15 +1113,15 @@
   function Mode(input, emit, opts) {
     input = input && input.tagName ? input : document.querySelector(input);
 
-    if (opts.mode === 'dp-modal') {
+    if (opts.mode === "dp-modal") {
       return ModalMode(input, emit, opts);
     }
 
-    if (opts.mode === 'dp-below') {
+    if (opts.mode === "dp-below") {
       return DropdownMode(input, emit, opts);
     }
 
-    if (opts.mode === 'dp-permanent') {
+    if (opts.mode === "dp-permanent") {
       return PermanentMode(input, emit, opts);
     }
   }
@@ -1073,7 +1139,7 @@
     var handlers = {};
 
     function onOne(name, handler) {
-      (handlers[name] = (handlers[name] || [])).push(handler);
+      (handlers[name] = handlers[name] || []).push(handler);
     }
 
     function onMany(fns) {
@@ -1083,7 +1149,7 @@
     }
 
     return {
-      on: function (name, handler) {
+      on: function(name, handler) {
         if (handler) {
           onOne(name, handler);
         } else {
@@ -1093,19 +1159,19 @@
         return this;
       },
 
-      emit: function (name, arg) {
-        (handlers[name] || []).forEach(function (handler) {
+      emit: function(name, arg) {
+        (handlers[name] || []).forEach(function(handler) {
           handler(name, arg);
         });
       },
 
-      off: function (name, handler) {
+      off: function(name, handler) {
         if (!name) {
           handlers = {};
         } else if (!handler) {
           handlers[name] = [];
         } else {
-          handlers[name] = (handlers[name] || []).filter(function (h) {
+          handlers[name] = (handlers[name] || []).filter(function(h) {
             return h !== handler;
           });
         }
@@ -1120,51 +1186,51 @@
    */
 
   /**
-  * The date picker language configuration
-  * @typedef {Object} LangOptions
-  * @property {Array.<string>} [days] - Days of the week
-  * @property {Array.<string>} [months] - Months of the year
-  * @property {string} today - The label for the 'today' button
-  * @property {string} close - The label for the 'close' button
-  * @property {string} clear - The label for the 'clear' button
-  */
+   * The date picker language configuration
+   * @typedef {Object} LangOptions
+   * @property {Array.<string>} [days] - Days of the week
+   * @property {Array.<string>} [months] - Months of the year
+   * @property {string} today - The label for the 'today' button
+   * @property {string} close - The label for the 'close' button
+   * @property {string} clear - The label for the 'clear' button
+   */
 
   /**
-  * The configuration options for a date picker.
-  *
-  * @typedef {Object} DatePickerOptions
-  * @property {LangOptions} [lang] - Configures the label text, defaults to English
-  * @property {('dp-modal'|'dp-below'|'dp-permanent')} [mode] - The date picker mode, defaults to 'dp-modal'
-  * @property {(string|Date)} [hilightedDate] - The date to hilight if no date is selected
-  * @property {function(string|Date):Date} [parse] - Parses a date, the complement of the "format" function
-  * @property {function(Date):string} [format] - Formats a date for displaying to user
-  * @property {function(Date):string} [dateClass] - Associates a custom CSS class with a date
-  * @property {function(Date):boolean} [inRange] - Indicates whether or not a date is selectable
-  * @property {(string|Date)} [min] - The minimum selectable date (inclusive, default 100 years ago)
-  * @property {(string|Date)} [max] - The maximum selectable date (inclusive, default 100 years from now)
-  */
+   * The configuration options for a date picker.
+   *
+   * @typedef {Object} DatePickerOptions
+   * @property {LangOptions} [lang] - Configures the label text, defaults to English
+   * @property {('dp-modal'|'dp-below'|'dp-permanent')} [mode] - The date picker mode, defaults to 'dp-modal'
+   * @property {(string|Date)} [hilightedDate] - The date to hilight if no date is selected
+   * @property {function(string|Date):Date} [parse] - Parses a date, the complement of the "format" function
+   * @property {function(Date):string} [format] - Formats a date for displaying to user
+   * @property {function(Date):string} [dateClass] - Associates a custom CSS class with a date
+   * @property {function(Date):boolean} [inRange] - Indicates whether or not a date is selectable
+   * @property {(string|Date)} [min] - The minimum selectable date (inclusive, default 100 years ago)
+   * @property {(string|Date)} [max] - The maximum selectable date (inclusive, default 100 years from now)
+   */
 
   /**
-  * The state values for the date picker
-  *
-  * @typedef {Object} DatePickerState
-  * @property {string} view - The current view 'day' | 'month' | 'year'
-  * @property {Date} selectedDate - The date which has been selected by the user
-  * @property {Date} hilightedDate - The date which is currently hilighted / active
-  */
+   * The state values for the date picker
+   *
+   * @typedef {Object} DatePickerState
+   * @property {string} view - The current view 'day' | 'month' | 'year'
+   * @property {Date} selectedDate - The date which has been selected by the user
+   * @property {Date} hilightedDate - The date which is currently hilighted / active
+   */
 
   /**
-  * An instance of TinyDatePicker
-  *
-  * @typedef {Object} DatePicker
-  * @property {DatePickerState} state - The values currently displayed.
-  * @property {function} on - Adds an event handler
-  * @property {function} off - Removes an event handler
-  * @property {function} setState - Changes the current state of the date picker
-  * @property {function} open - Opens the date picker
-  * @property {function} close - Closes the date picker
-  * @property {function} destroy - Destroys the date picker (removing all handlers from the input, too)
-  */
+   * An instance of TinyDatePicker
+   *
+   * @typedef {Object} DatePicker
+   * @property {DatePickerState} state - The values currently displayed.
+   * @property {function} on - Adds an event handler
+   * @property {function} off - Removes an event handler
+   * @property {function} setState - Changes the current state of the date picker
+   * @property {function} open - Opens the date picker
+   * @property {function} close - Closes the date picker
+   * @property {function} destroy - Destroys the date picker (removing all handlers from the input, too)
+   */
 
   /**
    * TinyDatePicker constructs a new date picker for the specified input
@@ -1186,7 +1252,7 @@
       setState: mode.setState,
       open: mode.open,
       close: mode.close,
-      destroy: mode.destroy,
+      destroy: mode.destroy
     };
 
     function emit(evt) {
@@ -1201,22 +1267,22 @@
   var TinyDatePicker$1 = TinyDatePicker;
 
   /**
-  * The state values for the date range picker
-  *
-  * @typedef {Object} DateRangeState
-  * @property {Date} start - The start date (can be null)
-  * @property {Date} end - The end date (can be null)
-  */
+   * The state values for the date range picker
+   *
+   * @typedef {Object} DateRangeState
+   * @property {Date} start - The start date (can be null)
+   * @property {Date} end - The end date (can be null)
+   */
 
   /**
-  * An instance of TinyDatePicker
-  *
-  * @typedef {Object} DateRangePickerInst
-  * @property {DateRangeState} state - The start / end dates
-  * @property {function} on - Adds an event handler
-  * @property {function} off - Removes an event handler
-  * @property {function} setState - Changes the current state of the date picker
-  */
+   * An instance of TinyDatePicker
+   *
+   * @typedef {Object} DateRangePickerInst
+   * @property {DateRangeState} state - The start / end dates
+   * @property {function} on - Adds an event handler
+   * @property {function} off - Removes an event handler
+   * @property {function} setState - Changes the current state of the date picker
+   */
 
   /**
    * TinyDatePicker constructs a new date picker for the specified input
@@ -1231,26 +1297,32 @@
     var hoverDate;
     var state = {
       start: undefined,
-      end: undefined,
+      end: undefined
     };
-    var start = TinyDatePicker(root.querySelector('.dr-cal-start'), cp({}, opts.startOpts, {
-      mode: 'dp-permanent',
-      dateClass: dateClass,
-    }));
-    var end = TinyDatePicker(root.querySelector('.dr-cal-end'), cp({}, opts.endOpts, {
-      mode: 'dp-permanent',
-      hilightedDate: shiftMonth(start.state.hilightedDate, 1),
-      dateClass: dateClass,
-    }));
+    var start = TinyDatePicker(
+      root.querySelector(".dr-cal-start"),
+      cp({}, opts.startOpts, {
+        mode: "dp-permanent",
+        dateClass: dateClass
+      })
+    );
+    var end = TinyDatePicker(
+      root.querySelector(".dr-cal-end"),
+      cp({}, opts.endOpts, {
+        mode: "dp-permanent",
+        hilightedDate: shiftMonth(start.state.hilightedDate, 1),
+        dateClass: dateClass
+      })
+    );
     var handlers = {
-      'statechange': onStateChange,
-      'select': dateSelected,
+      statechange: onStateChange,
+      select: dateSelected
     };
     var me = {
       state: state,
       setState: setState,
       on: emitter.on,
-      off: emitter.off,
+      off: emitter.off
     };
 
     start.on(handlers);
@@ -1267,11 +1339,11 @@
 
       if (dp === start) {
         end.setState({
-          hilightedDate: shiftMonth(dp.state.hilightedDate, 1),
+          hilightedDate: shiftMonth(dp.state.hilightedDate, 1)
         });
       } else {
         start.setState({
-          hilightedDate: shiftMonth(dp.state.hilightedDate, -1),
+          hilightedDate: shiftMonth(dp.state.hilightedDate, -1)
         });
       }
     }
@@ -1282,12 +1354,12 @@
       if (!state.start || state.end) {
         setState({
           start: dt,
-          end: undefined,
+          end: undefined
         });
       } else {
         setState({
           start: dt > state.start ? state.start : dt,
-          end: dt > state.start ? dt : state.start,
+          end: dt > state.start ? dt : state.start
         });
       }
     }
@@ -1296,7 +1368,7 @@
         state[key] = newState[key];
       }
 
-      emitter.emit('statechange', me);
+      emitter.emit("statechange", me);
       rerender();
     }
 
@@ -1307,11 +1379,11 @@
 
     // Hack to avoid a situation where iOS requires double-clicking to select
     if (!/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      root.addEventListener('mouseover', function mouseOverDate(e) {
-        if (e.target.classList.contains('dp-day')) {
+      root.addEventListener("mouseover", function mouseOverDate(e) {
+        if (e.target.classList.contains("dp-day")) {
           var dt = new Date(parseInt(e.target.dataset.date));
           var changed = !datesEq(dt, hoverDate);
-    
+
           if (changed) {
             hoverDate = dt;
             rerender();
@@ -1321,33 +1393,37 @@
     }
 
     function dateClass(dt) {
-      var rangeClass = (state.end || hoverDate) &&
-                       state.start &&
-                       inRange(dt, state.end || hoverDate, state.start);
+      var rangeClass =
+        (state.end || hoverDate) &&
+        state.start &&
+        inRange(dt, state.end || hoverDate, state.start);
       var selectedClass = datesEq(dt, state.start) || datesEq(dt, state.end);
 
-      return (rangeClass ? 'dr-in-range ' : '') +
-             (selectedClass ? 'dr-selected ' : '');
+      return (
+        (rangeClass ? "dr-in-range " : "") +
+        (selectedClass ? "dr-selected " : "")
+      );
     }
 
     return me;
   }
 
   function renderInto(container) {
-    if (typeof container === 'string') {
+    if (typeof container === "string") {
       container = document.querySelector(container);
     }
 
-    container.innerHTML = '<div class="dr-cals">' +
+    container.innerHTML =
+      '<div class="dr-cals">' +
       '<div class="dr-cal-start"></div>' +
       '<div class="dr-cal-end"></div>' +
-      '</div>';
+      "</div>";
 
-    return container.querySelector('.dr-cals');
+    return container.querySelector(".dr-cals");
   }
 
   function toMonths(dt) {
-    return (dt.getYear() * 12) + dt.getMonth();
+    return dt.getYear() * 12 + dt.getMonth();
   }
 
   function diffMonths(d1, d2) {
@@ -1361,6 +1437,5 @@
   exports.TinyDatePicker = TinyDatePicker$1;
   exports.DateRangePicker = DateRangePicker;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+  Object.defineProperty(exports, "__esModule", { value: true });
+});
