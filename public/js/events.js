@@ -122,6 +122,9 @@ $(document).ready(function() {
     var newEventCardCategory = $("<li>");
     newEventCardCategory.addClass("list-group-item");
     newEventCardCategory.text(event.category);
+    var newEventCardCategory = $("<li>");
+    newEventCardCategory.addClass("list-group-item");
+    newEventCardCategory.text(event.Users.length);
     var newEventCardGroupSize = $("<li>");
     newEventCardGroupSize.addClass("list-group-item");
     var newEventCardButtons = $("<div>");
