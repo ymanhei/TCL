@@ -4,6 +4,16 @@ $(document).ready(function() {
   var eventsResult;
   var eventsContainer = $("#events-container");
 
+  var advStart = $(".ex-inputs-start");
+  var advEnd = $(".ex-inputs-end");
+  var container = $(".ex-inputs-picker");
+  var eventsContainer = $("#events-container");
+  var formSection = $("#form-section");
+  var formWrapper = $("#form-wrapper");
+
+  TinyDatePicker(document.querySelector(".ex-inputs-start"));
+  TinyDatePicker(document.querySelector(".ex-inputs-end"));
+
   if (url.indexOf("?date=") !== -1) {
     dataDetail = url.split("=")[1];
     console.log(dataDetail);
