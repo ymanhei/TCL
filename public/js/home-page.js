@@ -7,21 +7,42 @@ $(document).ready(function() {
   //     .val("what")
   //     .text("what")
   // );
-  $.get("/api/events", function(data) {
-    console.log(data);
-    console.log("?");
+  // $.get("/api/events", function(data) {
+  //   console.log(data);
+  //   console.log("?");
 
-    for (let i = 0; i < data.length; i++) {
-      console.log(data[i].location);
+  //   for (let i = 0; i < data.length; i++) {
+  //     console.log(data[i].location);
+  //     locationDropDownMenu
+  //       .append(
+  //         $("<option>")
+  //           .val(data[i].location)
+  //           .text(data[i].location)
+  //       )
+  //       .trigger("chosen:updated");
+  //   }
+  // });
+  $.get("/api/events", function(data) {
+    const locations = _.map(data, datum => {
+      return datum.location;
+    });
+    var dataLocationDropDown = _.uniq(locations);
+    for (let i = 0; i < dataLocationDropDown.length; i++) {
+      console.log(dataLocationDropDown[i]);
       locationDropDownMenu
         .append(
           $("<option>")
-            .val(data[i].location)
-            .text(data[i].location)
+            .val(dataLocationDropDown[i])
+            .text(dataLocationDropDown[i])
         )
         .trigger("chosen:updated");
     }
   });
+
+
+
+
+
 
   // Or with a CSS selector
 
