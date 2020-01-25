@@ -139,4 +139,75 @@ $(document).ready(function() {
 
     return newEventBox;
   }
+  function userFormPopup() {
+    console.log("ehh");
+    var userForm = $("<div>");
+    var largeForm = `
+    <form class="needs-validation user-form" novalidate>
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom01">First name</label>
+        <input type="text" class="form-control" id="fisrtNameBlock" placeholder="First Name" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom02">Last name</label>
+        <input type="text" class="form-control" id="lastNameBlock" placeholder="Last Name" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="validationCustomUsername">Username</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="userNameBlock" aria-describedby="inputGroupPrepend" required>
+          <div class="invalid-feedback" id="mobileNumberblock">
+            Please Enter Your Mobile Number
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom03">Email</label>
+        <input type="text" class="form-control" id="emailBlock" required>
+        
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom04">Gender</label>
+        <select class="custom-select" id="genderBlock" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom05">Age</label>
+        <input type="text" class="form-control" id="ageBlock" required>
+        
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="agreeTCblock" required>
+        <label class="form-check-label" for="invalidCheck">
+          Authorize use of your personal data within this site
+        </label>
+      
+      </div>
+    </div>
+    <button class="btn btn-primary submitUserFormButton" type="submit" id="">Submit form</button>
+  </form>
+    `;
+
+    userForm.append(largeForm);
+    userForm.data("user");
+    formSection.append(userForm);
+    formWrapper.css("visibility", "visible");
+  }
+
 });
