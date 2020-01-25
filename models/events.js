@@ -22,6 +22,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       len: [1, 140]
     },
+    imageUrl: {
+      type: DataTypes.TEXT
+    },
     datetime: {
       type: DataTypes.STRING,
       allowNull: false
