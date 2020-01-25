@@ -41,7 +41,10 @@ VALUES
 ());
 
 INSERT INTO events
+
+
     (activity,category,description,location,datetime,`limit`,createdAt,updatedAt
+  
 ) VALUES
 ("Fishing & Crabing","Leisure","Night fishing and crabing","Mandurah","2020-01-19","3",current_timestamp
 (),current_timestamp
@@ -49,6 +52,7 @@ INSERT INTO events
 
 INSERT INTO events
     (activity,category,description,location,datetime,`limit`,createdAt,updatedAt
+  
 ) VALUES
 ("Dancing","Social","Night Club Dancing","Fremantle","2020-01-21","6",current_timestamp
 (),current_timestamp
@@ -56,6 +60,7 @@ INSERT INTO events
 
 INSERT INTO events
     (activity,category,description,location,datetime,`limit`,createdAt,updatedAt
+  
 ) VALUES
 ("Fishing & Crabing","Leisure","Night fishing and crabing","Mandurah","2020-01-19","3",current_timestamp
 (),current_timestamp
@@ -63,6 +68,7 @@ INSERT INTO events
 
 INSERT INTO events
     (activity,category,description,location,datetime,`limit`,createdAt,updatedAt
+  
 ) VALUES
 ("Boxing Battle","Sport","Fight each other until die","Perth","2020-01-22","2",current_timestamp
 (),current_timestamp
