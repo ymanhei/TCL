@@ -2,46 +2,7 @@ $(document).ready(function() {
   var url = window.location.search;
   var dataDetail;
   var eventsResult;
-  document.querySelectorAll("article.first .oferts");
   var eventsContainer = $("#events-container");
-
-  // (function() {
-  //   var advRoot = $(".ex-inputs");
-  //   var advDateStart = $(".ex-inputs-start");
-  //   var advDateEnd = $(".ex-inputs-end");
-  //   var advDateContainer = $(".ex-inputs-picker");
-  //   DateRangePicker.DateRangePicker(advDateContainer).on(
-  //     "statechange",
-  //     function(_, rp) {
-  //       // Update the inputs when the state changes
-  //       var range = rp.state;
-  //       advDateStart.value = range.start ? range.start.toDateString() : "";
-  //       advDateEnd.value = range.end ? range.end.toDateString() : "";
-  //     }
-  //   );
-
-  //   // When the inputs gain focus, show the date range picker
-  //   advDateStart.addEventListener("focus", showPicker);
-  //   advDateEnd.addEventListener("focus", showPicker);
-
-  //   function showPicker() {
-  //     advDateContainer.classList.add("ex-inputs-picker-visible");
-  //   }
-
-  //   // If focus leaves the root element, it is not in the date
-  //   // picker or the inputs, so we should hide the date picker
-  //   // we do this in a setTimeout because redraws cause temporary
-  //   // loss of focus.
-  //   let previousTimeout;
-  //   advRoot.addEventListener("focusout", function hidePicker() {
-  //     clearTimeout(previousTimeout);
-  //     previousTimeout = setTimeout(function() {
-  //       if (!advRoot.contains(document.activeElement)) {
-  //         advDateContainer.classList.remove("ex-inputs-picker-visible");
-  //       }
-  //     }, 10);
-  //   });
-  // })();
 
   if (url.indexOf("?date=") !== -1) {
     dataDetail = url.split("=")[1];
@@ -174,11 +135,7 @@ $(document).ready(function() {
     newEventCard.append(newEventCardButtons);
     newEventCardButtons.append(joinEventButton).append(exitEventButton);
     newEventBox.data("eventId", event.id);
-
-    joinEventButton.click(userFormPopup);
-    userFormPopup = () => {
-      var userForm = $("<div>");
-    };
+    joinEventButton.data("event", event);
 
     return newEventBox;
   }

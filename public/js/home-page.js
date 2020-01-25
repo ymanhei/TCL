@@ -23,6 +23,9 @@ $(document).ready(function() {
     }
   });
 
+  // Or with a CSS selector
+
+  TinyDatePicker(".date-example");
   // function createLocationMenu(location) {
   //   var menuOption = $("<option>");
   //   menuOption.attr("value", location);
