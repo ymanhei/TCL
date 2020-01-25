@@ -11,8 +11,8 @@ $(document).ready(function() {
   var formSection = $("#form-section");
   var formWrapper = $("#form-wrapper");
 
-  TinyDatePicker(document.querySelector(".ex-inputs-start"));
-  TinyDatePicker(document.querySelector(".ex-inputs-end"));
+/*   TinyDatePicker(document.querySelector(".ex-inputs-start"));
+  TinyDatePicker(document.querySelector(".ex-inputs-end")); */
 
   if (url.indexOf("?date=") !== -1) {
     dataDetail = url.split("=")[1];
