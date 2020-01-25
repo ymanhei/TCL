@@ -9,6 +9,16 @@ $(document).ready(function() {
   var limitInput = $("#event-limit");
   var imgurlInput = $("#event-imgurl");
 
+  let the_event = {
+    activity: "",
+    description: "",
+    datetime: "",
+    category: "",
+    location: "",
+    limit: "",
+    imgurl: ""
+  };
+
   //location
   //imageurl
   //category logo
@@ -20,6 +30,7 @@ $(document).ready(function() {
 
   $("#submit-event").click(function() {
     handleNewEventSubmit(event);
+    //handleEdit();
   });
 
   //add delete functionality
@@ -39,17 +50,19 @@ $(document).ready(function() {
         .trim()
     ) {
     }
+
+    the_event.activity = nameInput.val().trim();
+    the_event.description = descInput.val().trim();
+    the_event.datetime = dateInput.val().trim();
+    the_event.category = catInput.val().trim();
+    the_event.location = locInput.val().trim();
+    the_event.limit = limitInput.val().trim();
+    the_event.imageUrl = imgurlInput.val().trim();
+
     //Calling the upsertAuthor function and passing in the value of the name input
-    postEvent({
-      activity: nameInput.val().trim(),
-      description: descInput.val().trim(),
-      datetime: dateInput.val().trim(),
-      category: catInput.val().trim(),
-      location: locInput.val().trim(),
-      limit: limitInput.val().trim()
-      //imgurl: imgurlInput.val().trim()
-    });
+    postEvent(the_event);
     console.log(nameInput.val());
+    console.log("IMG:    " + imgurlInput.val());
   }
 
   console.log(nameInput.val());
@@ -130,5 +143,34 @@ $(document).ready(function() {
       method: "DELETE",
       url: "/api/authors/" + id
     }).then(getAuthors);
+  }
+
+  function populateForm(post) {
+    console.log("ji");
+    $("#event-name").val(post.activity);
+    $("#event-desc").val(post.description);
+    $("#event-loc").val(post.location);
+    $("#event-dt").val(post.datetime);
+    $("#event-cat").val(post.category);
+    $("#event-limit").val(post.limit);
+    $("event-imgurl").val(post.imgurl);
+  }
+
+  function handleEdit() {
+    let id = window.location.pathname.split("/").pop();
+    console.log("jh");
+
+    $.get("/api/events/" + id, function(data) {
+      populateForm(data);
+    });
+
+    the_event.id = id;
+    console.log(the_event);
+
+    $.ajax({
+      method: "PUT",
+      url: "/api/events/" + the_event.id,
+      data: the_event
+    });
   }
 });
