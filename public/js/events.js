@@ -136,7 +136,7 @@ $(document).ready(function() {
     newEventCardButtons.append(joinEventButton).append(exitEventButton);
     newEventBox.data("eventId", event.id);
     joinEventButton.data("event", event);
-
+    joinEventButton.click(userFormPopup);
     return newEventBox;
   }
   function userFormPopup() {
